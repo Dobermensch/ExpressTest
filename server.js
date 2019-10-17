@@ -34,6 +34,7 @@ io.on("connection", function(socket) {
 
   // When a cell changes then apply changes in server board and broadcast it to other clients
   socket.on("cellChanged", function(data) {
+    console.log("cell changed");
     GS.board[data.key[0]][data.key[1]].alive = 1;
     GS.board[data.key[0]][data.key[1]].color = [
       data.color.r,

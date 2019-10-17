@@ -232,12 +232,11 @@ class GameService {
     let changedCells = [deadCells, newborns].map((arr, a_i) =>
       arr.map(cell => ({
         ind: cell.index,
-        color: cell.color,
-        alive: a_i === 1
+        color: cell.color
       }))
     );
 
-    if (changedCells.length > 0) {
+    if (changedCells.some(arr => arr.length > 0)) {
       this.i_o.emit("changedCells", changedCells);
     }
   }

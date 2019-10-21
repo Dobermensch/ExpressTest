@@ -13,6 +13,7 @@ _build_: execute `npm run build` in client repo
 _deploy_: Deploy on [heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
 
 _Use_: Locally or on http://secret-forest-30430.herokuapp.com/
+
 Locally:
 
 - 1.  `npm install` in main repo and client repo.

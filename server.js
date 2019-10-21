@@ -23,6 +23,9 @@ io.on("connection", function(socket) {
     GS.runGame();
   }
 
+  // letting all clients know the number of windows/players
+  io.emit("numOfPlayersChanged", { clients: clientCount, increased: true });
+
   console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
   console.log("a user connected");
 
@@ -35,25 +38,29 @@ io.on("connection", function(socket) {
   // When a cell changes then apply changes in server board and broadcast it to other clients
   socket.on("cellChanged", function(data) {
     console.log("cell changed");
-    GS.board[data.key[0]][data.key[1]].alive = 1;
-    GS.board[data.key[0]][data.key[1]].color = [
-      data.color.r,
-      data.color.g,
-      data.color.b
-    ];
+    let row = data.key[0];
+    let col = data.key[1];
 
-    GS.liveCells[GS.get_key(data.key[0], data.key[1])] =
-      GS.board[data.key[0]][data.key[1]];
+    GS.board[row][col].alive = 1;
+    GS.board[row][col].color = [data.color.r, data.color.g, data.color.b];
+
+    // storing cell in live cells key-val store
+    GS.liveCells[GS.get_key(row, col)] = GS.board[row][col];
 
     // need to emit the changes to other clients immediately...
     socket.broadcast.emit("otherChangedCell", {
-      ind: [data.key[0], data.key[1]],
+      ind: [row, col],
       color: [data.color.r, data.color.g, data.color.b]
     });
   });
 
-  // On client disconnect, stop game engine and take care of saving resources
+  // On client disconnect, stop game engine
   socket.on("disconnect", function() {
+    let clientCount = io.sockets.server.engine.clientsCount;
+    io.emit("numOfPlayersChanged", {
+      clients: clientCount,
+      increased: false
+    });
     console.log("user disconnected");
   });
 });

@@ -26,7 +26,7 @@ I decided to go with the FullStack Javascript approach despite having no experie
 
 The main choices were obvious then. React for FrontEnd, Express for BackEnd. SocketIO as WS library provided great convenience.
 
-Architecture of repo is simple: Client Repo within main Server Repo. Just Style preference. Could have made two folders of Server & Client instead.
+Architecture of repo is simple: Client Repo and Server Repo.
 
 **Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project.**
 

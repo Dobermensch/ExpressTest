@@ -2,7 +2,7 @@
     Simple Unit Tests
 */
 
-const GameService = require("../ServerDependencies/services/game-service").getGameService();
+const GameService = require("../ServerDependencies/services/gameService").getGameService();
 const Cell = require("../ServerDependencies/Cell").getCell();
 
 beforeEach(() => {

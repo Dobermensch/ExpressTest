@@ -254,6 +254,7 @@ class GameService {
         clearInterval(current_this.game_running);
         current_this.game_running = null;
         current_this.live_cells = {};
+        current_this.setBoard();
         console.log("ended game");
       }
       console.log("tick");
